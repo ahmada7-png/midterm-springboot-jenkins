@@ -1,15 +1,11 @@
 pipeline {
-  agent {
-    docker {
-      image 'maven:3.9.6-eclipse-temurin-11'
-      args '-v $HOME/.m2:/root/.m2'
-    }
-  }
+  agent any
 
   stages {
     stage('Build') {
       steps {
-        sh 'mvn -B clean package'
+        sh 'chmod +x mvnw || true'
+        sh './mvnw -B clean package'
       }
       post {
         success {
